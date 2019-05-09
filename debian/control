@@ -1,0 +1,71 @@
+Source: plasma-widget-lliurex-quota
+Section: kde
+Priority: optional
+Uploaders: Maximiliano Curia <maxy@debian.org>
+Build-Depends: cmake (>= 2.8.12),
+               debhelper (>= 9),
+               extra-cmake-modules (>= 5.18.0~),
+               kinit-dev (>= 5.18.0~),
+               kio-dev (>= 5.18.0~),
+               kross-dev (>= 5.18.0~),
+               libboost-dev,
+               libgee-dev | libgee-0.8-dev,
+               libglib2.0-dev,
+               libkf5activities-dev (>= 5.17.0~),
+               libkf5config-dev (>= 5.17.0~),
+               libkf5configwidgets-dev (>= 5.17.0~),
+               libkf5coreaddons-dev (>= 5.17.0~),
+               libkf5i18n-dev (>= 5.17.0~),
+               libkf5kcmutils-dev (>= 5.17.0~),
+               libkf5kdelibs4support-dev (>= 5.17.0~),
+               libkf5newstuff-dev (>= 5.17.0~),
+               libkf5runner-dev (>= 5.17.0~),
+               libkf5service-dev (>= 5.17.0~),
+               libkf5sysguard-dev (>= 4:5.5.1~),
+               libkf5unitconversion-dev (>= 5.17.0~),
+               libqt5x11extras5-dev (>= 5.4),
+               libx11-dev,
+               libxcb-keysyms1-dev,
+               pkg-config,
+               pkg-kde-tools (>= 0.15.18~),
+               plasma-framework-dev (>= 5.17.0~),
+               plasma-workspace-dev (>= 4:5.5.1.1~),
+               qtbase5-dev (>= 5.4),
+               qtdeclarative5-dev (>= 5.4),
+               qtwebengine5-dev,
+               shared-mime-info
+Standards-Version: 3.9.6
+Homepage: https://projects.kde.org/projects/kde/workspace/kdeplasma-addons
+Vcs-Git: https://anongit.neon.kde.org/kde/kdeplasma-addons
+Vcs-Browser: https://packaging.neon.kde.org/kde/kdeplasma-addons.git
+Maintainer: Neon CI <neon@kde.org>
+
+Package: plasma-widget-lliurex-quota
+Architecture: any
+Depends: kpackagetool5,
+         libkf5purpose5,
+         plasma-framework,
+         plasma-workspace,
+         qml-module-org-kde-draganddrop,
+         qml-module-org-kde-kcoreaddons,
+         qml-module-org-kde-kio,
+         qml-module-org-kde-purpose,
+         qml-module-qtgraphicaleffects,
+         qml-module-qtquick-layouts,
+         qml-module-qtquick-window2,
+         qml-module-qtwebengine,
+         qml-module-qtwebkit,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: additional widgets for Plasma 5
+ This package contains additional Plasma 5 widgets shipped in the Plasma
+ addons module. Install it if you want a variety of widgets on your Plasma
+ desktop.
+ .
+ This package provides the following widgets:
+  * Lliurex-quota
+ .
+ This package is part of the KDE Plasma 5 addons module.
+
+
+

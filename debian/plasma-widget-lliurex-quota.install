@@ -1,0 +1,5 @@
+usr/lib/*/qt5/qml/org/kde/plasma/private/diskquota/
+usr/share/kservices5/plasma-applet-org.kde.plasma.diskquota.desktop
+usr/share/metainfo/org.kde.plasma.diskquota.appdata.xml
+usr/share/plasma/plasmoids/org.kde.plasma.diskquota/
+usr/share/locale/*/*/*.mo
