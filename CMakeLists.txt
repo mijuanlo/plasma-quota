@@ -22,11 +22,13 @@ include(ECMQtDeclareLoggingCategory)
 set(REQUIRED_QT_VERSION 5.9.0)
 set(KF5_MIN_VERSION 5.42.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui DBus Quick Qml Widgets X11Extras)
+#find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui DBus Quick Qml Widgets X11Extras)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-    Activities Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service UnitConversion KDELibs4Support NewStuff Kross)
+    Plasma I18n)
+#    Activities Config ConfigWidgets CoreAddons I18n KIO KCMUtils Plasma Runner Service UnitConversion KDELibs4Support NewStuff Kross)
 
-find_package(LibTaskManager CONFIG REQUIRED)
+#find_package(LibTaskManager CONFIG REQUIRED)
 
 find_package(X11)
 set_package_properties(X11 PROPERTIES DESCRIPTION "X11 libraries"
