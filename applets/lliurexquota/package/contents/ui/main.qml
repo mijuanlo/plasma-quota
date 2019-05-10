@@ -32,7 +32,7 @@ Item {
     Layout.minimumHeight: units.gridUnit * 2
 
     Plasmoid.status: {
-        switch (lliurexDiskQuota.status) {
+        switch (LliurexDiskQuota.status) {
             case LliurexDiskQuota.NeedsAttentionStatus:
                 return PlasmaCore.Types.NeedsAttentionStatus
             case LliurexDiskQuota.ActiveStatus:
@@ -45,9 +45,9 @@ Item {
     Plasmoid.switchWidth: units.gridUnit * 10
     Plasmoid.switchHeight: units.gridUnit * 10
 
-    Plasmoid.icon: lliurexDiskQuota.iconName
-    Plasmoid.toolTipMainText: lliurexDiskQuota.toolTip
-    Plasmoid.toolTipSubText: lliurexDiskQuota.subToolTip
+    Plasmoid.icon: LliurexDiskQuota.iconName
+    Plasmoid.toolTipMainText: LliurexDiskQuota.toolTip
+    Plasmoid.toolTipSubText: LliurexDiskQuota.subToolTip
 
     Component.onCompleted: plasmoid.removeAction("configure")
 
@@ -64,18 +64,18 @@ Item {
         // HACK: connection to reset currentIndex to -1. Without this, when
         // uninstalling filelight, the selection highlight remains fixed (which is wrong)
         Connections {
-            target: lliurexDiskQuota
+            target: LliurexDiskQuota
             onCleanUpToolInstalledChanged: {
-                if (!lliurexDiskQuota.cleanUpToolInstalled) {
+                if (!LliurexDiskQuota.cleanUpToolInstalled) {
                     listView.currentIndex = -1
                 }
             }
         }
 
         Components.Label {
-            visible: !lliurexDiskQuota.quotaInstalled || listView.count == 0
+            visible: !LliurexDiskQuota.quotaInstalled || listView.count == 0
             anchors.fill: parent
-            text: lliurexDiskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
+            text: LliurexDiskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -84,14 +84,14 @@ Item {
             anchors.fill: parent
             ListView {
                 id: listView
-                model: lliurexDiskQuota.model
+                model: LliurexDiskQuota.model
                 boundsBehavior: Flickable.StopAtBounds
                 highlight: Components.Highlight { }
                 highlightMoveDuration: 0
                 highlightResizeDuration: 0
                 currentIndex: -1
                 delegate: ListDelegateItem {
-                    enabled: lliurexDiskQuota.cleanUpToolInstalled
+                    enabled: LliurexDiskQuota.cleanUpToolInstalled
                     width: listView.width
                     mountPoint: model.mountPoint
                     details: model.details
