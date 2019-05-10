@@ -15,8 +15,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#ifndef PLASMA_QUOTA_ITEM_H
-#define PLASMA_QUOTA_ITEM_H
+#ifndef PLASMA_LLIUREX_QUOTA_ITEM_H
+#define PLASMA_LLIUREX_QUOTA_ITEM_H
 
 #include <QString>
 #include <QMetaType>
@@ -24,10 +24,10 @@
 /**
  * Class that holds all quota info for one mount point.
  */
-class QuotaItem
+class lliurexQuotaItem
 {
 public:
-    QuotaItem();
+    lliurexQuotaItem();
 
     QString mountPoint() const;
     void setMountPoint(const QString &mountPoint);
@@ -47,8 +47,8 @@ public:
     QString freeString() const;
     void setFreeString(const QString &freeString);
 
-    bool operator==(const QuotaItem &other) const;
-    bool operator!=(const QuotaItem &other) const;
+    bool operator==(const lliurexQuotaItem &other) const;
+    bool operator!=(const lliurexQuotaItem &other) const;
 
 private:
     QString m_iconName;
@@ -59,6 +59,6 @@ private:
     QString m_freeString;
 };
 
-Q_DECLARE_METATYPE(QuotaItem)
+Q_DECLARE_METATYPE(lliurexQuotaItem)
 
-#endif // PLASMA_QUOTA_ITEM_H
+#endif // PLASMA_LLIUREX_QUOTA_ITEM_H

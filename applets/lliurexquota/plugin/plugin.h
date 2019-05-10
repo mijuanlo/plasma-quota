@@ -15,13 +15,13 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#ifndef QUOTA_WATCH_PLUGIN_H
-#define QUOTA_WATCH_PLUGIN_H
+#ifndef LLIUREX_QUOTA_WATCH_PLUGIN_H
+#define LLIUREX_QUOTA_WATCH_PLUGIN_H
 
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 
-class DiskQuotaPlugin : public QQmlExtensionPlugin
+class lliurexDiskQuotaPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
@@ -30,4 +30,4 @@ public:
     void registerTypes(const char *uri) Q_DECL_OVERRIDE;
 };
 
-#endif // QUOTA_WATCH_PLUGIN_H
+#endif // LLIUREX_QUOTA_WATCH_PLUGIN_H

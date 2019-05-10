@@ -15,11 +15,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#include "QuotaListModel.h"
+#include "lliurexQuotaListModel.h"
 
 #include <QDebug>
 
-QuotaListModel::QuotaListModel(QObject *parent)
+lliurexQuotaListModel::lliurexQuotaListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
 }
@@ -38,7 +38,7 @@ namespace {
     };
 }
 
-QHash<int, QByteArray> QuotaListModel::roleNames() const
+QHash<int, QByteArray> lliurexQuotaListModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[DetailsRole] = "details";
@@ -51,7 +51,7 @@ QHash<int, QByteArray> QuotaListModel::roleNames() const
     return roles;
 }
 
-QVariant QuotaListModel::data(const QModelIndex &index, int role) const
+QVariant lliurexQuotaListModel::data(const QModelIndex &index, int role) const
 {
     if (! index.isValid() || index.row() >= m_items.size()) {
         return QVariant();
@@ -71,7 +71,7 @@ QVariant QuotaListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-int QuotaListModel::rowCount(const QModelIndex &index) const
+int lliurexQuotaListModel::rowCount(const QModelIndex &index) const
 {
     if (! index.isValid()) {
         return m_items.size();
@@ -80,13 +80,13 @@ int QuotaListModel::rowCount(const QModelIndex &index) const
     return 0;
 }
 
-bool QuotaListModel::setData(const QModelIndex &index, const QVariant &variant, int role)
+bool lliurexQuotaListModel::setData(const QModelIndex &index, const QVariant &variant, int role)
 {
     Q_UNUSED(role)
 
     const int row = index.row();
     if (index.isValid() && row < m_items.size()) {
-        const QuotaItem item = variant.value<QuotaItem>();
+        const lliurexQuotaItem item = variant.value<lliurexQuotaItem>();
 
         // This assert makes sure that changing items modify the correct item:
         // therefore, the unique identifier 'mountPoint()' is used. If that
@@ -104,7 +104,7 @@ bool QuotaListModel::setData(const QModelIndex &index, const QVariant &variant, 
     return false;
 }
 
-bool QuotaListModel::insertRows(int row, int count, const QModelIndex &parent)
+bool lliurexQuotaListModel::insertRows(int row, int count, const QModelIndex &parent)
 {
     // only top-level items are supported
     if (parent.isValid()) {
@@ -112,13 +112,13 @@ bool QuotaListModel::insertRows(int row, int count, const QModelIndex &parent)
     }
 
     beginInsertRows(QModelIndex(), row, row + count - 1);
-    m_items.insert(row, count, QuotaItem());
+    m_items.insert(row, count, lliurexQuotaItem());
     endInsertRows();
 
     return true;
 }
 
-bool QuotaListModel::removeRows(int row, int count, const QModelIndex &parent)
+bool lliurexQuotaListModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     // only top-level items are valid
     if (parent.isValid() || (row + count) >= m_items.size()) {
@@ -132,7 +132,7 @@ bool QuotaListModel::removeRows(int row, int count, const QModelIndex &parent)
     return true;
 }
 
-void QuotaListModel::clear()
+void lliurexQuotaListModel::clear()
 {
     beginResetModel();
     m_items.clear();
@@ -140,7 +140,7 @@ void QuotaListModel::clear()
 }
 
 namespace {
-    QStringList mountPoints(const QVector<QuotaItem> &items)
+    QStringList mountPoints(const QVector<lliurexQuotaItem> &items)
     {
         QStringList list;
         for (auto & item : items) {
@@ -149,7 +149,7 @@ namespace {
         return list;
     }
 
-    int indexOfMountPoint(const QString &mountPoint, const QVector<QuotaItem> &items)
+    int indexOfMountPoint(const QString &mountPoint, const QVector<lliurexQuotaItem> &items)
     {
         for (int i = 0; i < items.size(); ++i) {
             if (mountPoint == items[i].mountPoint()) {
@@ -160,7 +160,7 @@ namespace {
     }
 }
 
-void QuotaListModel::updateItems(const QVector<QuotaItem> &items)
+void lliurexQuotaListModel::updateItems(const QVector<lliurexQuotaItem> &items)
 {
     QStringList unusedMountPoints = mountPoints(m_items);
 

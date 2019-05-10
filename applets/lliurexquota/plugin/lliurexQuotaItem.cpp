@@ -15,12 +15,12 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#include "QuotaItem.h"
+#include "lliurexQuotaItem.h"
 
 #include <QDebug>
 
-QuotaItem::QuotaItem()
-    : m_iconName(QStringLiteral("quota"))
+lliurexQuotaItem::lliurexQuotaItem()
+    : m_iconName(QStringLiteral("lliurexquota"))
     , m_mountPoint()
     , m_usage(0)
     , m_mountString()
@@ -28,67 +28,67 @@ QuotaItem::QuotaItem()
 {
 }
 
-QString QuotaItem::iconName() const
+QString lliurexQuotaItem::iconName() const
 {
     return m_iconName;
 }
 
-void QuotaItem::setIconName(const QString &name)
+void lliurexQuotaItem::setIconName(const QString &name)
 {
     m_iconName = name;
 }
 
-QString QuotaItem::mountPoint() const
+QString lliurexQuotaItem::mountPoint() const
 {
     return m_mountPoint;
 }
 
-void QuotaItem::setMountPoint(const QString &mountPoint)
+void lliurexQuotaItem::setMountPoint(const QString &mountPoint)
 {
     m_mountPoint = mountPoint;
 }
 
-int QuotaItem::usage() const
+int lliurexQuotaItem::usage() const
 {
     return m_usage;
 }
 
-void QuotaItem::setUsage(int usage)
+void lliurexQuotaItem::setUsage(int usage)
 {
     m_usage = usage;
 }
 
-QString QuotaItem::mountString() const
+QString lliurexQuotaItem::mountString() const
 {
     return m_mountString;
 }
 
-void QuotaItem::setMountString(const QString &mountString)
+void lliurexQuotaItem::setMountString(const QString &mountString)
 {
     m_mountString = mountString;
 }
 
-QString QuotaItem::usedString() const
+QString lliurexQuotaItem::usedString() const
 {
     return m_usedString;
 }
 
-void QuotaItem::setUsedString(const QString &usedString)
+void lliurexQuotaItem::setUsedString(const QString &usedString)
 {
     m_usedString = usedString;
 }
 
-QString QuotaItem::freeString() const
+QString lliurexQuotaItem::freeString() const
 {
     return m_freeString;
 }
 
-void QuotaItem::setFreeString(const QString &freeString)
+void lliurexQuotaItem::setFreeString(const QString &freeString)
 {
     m_freeString = freeString;
 }
 
-bool QuotaItem::operator==(const QuotaItem &other) const
+bool lliurexQuotaItem::operator==(const lliurexQuotaItem &other) const
 {
     return m_mountPoint == other.m_mountPoint
         && m_iconName == other.m_iconName
@@ -98,7 +98,7 @@ bool QuotaItem::operator==(const QuotaItem &other) const
         && m_freeString == other.m_freeString;
 }
 
-bool QuotaItem::operator!=(const QuotaItem &other) const
+bool lliurexQuotaItem::operator!=(const lliurexQuotaItem &other) const
 {
     return ! (*this == other);
 }

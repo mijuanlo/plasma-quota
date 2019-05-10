@@ -15,23 +15,23 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#ifndef PLASMA_QUOTA_LIST_MODEL_H
-#define PLASMA_QUOTA_LIST_MODEL_H
+#ifndef PLASMA_LLIUREX_QUOTA_LIST_MODEL_H
+#define PLASMA_LLIUREX_QUOTA_LIST_MODEL_H
 
 #include <QAbstractListModel>
 #include <QVector>
 
-#include "QuotaItem.h"
+#include "lliurexQuotaItem.h"
 
 /**
  * Data model holding disk quota items.
  */
-class QuotaListModel : public QAbstractListModel
+class lliurexQuotaListModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    QuotaListModel(QObject *parent = nullptr);
+    lliurexQuotaListModel(QObject *parent = nullptr);
 
 public: // QAbstractListModel overrides
     /**
@@ -69,7 +69,7 @@ public: // additional helper functions
      * Merges @p items into the existing quota item list. Old items that are
      * not available in @p items anymore are deleted.
      */
-    void updateItems(const QVector<QuotaItem> &items);
+    void updateItems(const QVector<lliurexQuotaItem> &items);
 
     /**
      * Clears all items in the model.
@@ -77,7 +77,7 @@ public: // additional helper functions
     void clear();
 
 private:
-    QVector<QuotaItem> m_items;
+    QVector<lliurexQuotaItem> m_items;
 };
 
-#endif // PLASMA_QUOTA_LIST_MODEL_H
+#endif // PLASMA_LLIUREX_QUOTA_LIST_MODEL_H

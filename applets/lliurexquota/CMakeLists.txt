@@ -10,9 +10,9 @@ add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.lliurexquota"
 
 set(diskquota_SRCS
     plugin/plugin.cpp
-    plugin/DiskQuota.cpp
-    plugin/QuotaListModel.cpp
-    plugin/QuotaItem.cpp
+    plugin/lliurexDiskQuota.cpp
+    plugin/lliurexQuotaListModel.cpp
+    plugin/lliurexQuotaItem.cpp
 )
 
 add_library(lliurexquotaplugin SHARED ${diskquota_SRCS})

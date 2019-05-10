@@ -15,21 +15,21 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#ifndef PLASMA_DISK_QUOTA_H
-#define PLASMA_DISK_QUOTA_H
+#ifndef PLASMA_LLIUREX_DISK_QUOTA_H
+#define PLASMA_LLIUREX_DISK_QUOTA_H
 
 #include <QObject>
 #include <QProcess>
 
 class QTimer;
-class QuotaListModel;
+class lliurexQuotaListModel;
 
 /**
  * Class monitoring the file system quota.
  * The monitoring is performed through a timer, running the 'quota'
  * command line tool.
  */
-class DiskQuota : public QObject
+class lliurexDiskQuota : public QObject
 {
     Q_OBJECT
 
@@ -41,12 +41,12 @@ class DiskQuota : public QObject
     Q_PROPERTY(QString subToolTip READ subToolTip NOTIFY subToolTipChanged)
     Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
 
-    Q_PROPERTY(QuotaListModel* model READ model CONSTANT)
+    Q_PROPERTY(lliurexQuotaListModel* model READ model CONSTANT)
 
     Q_ENUMS(TrayStatus)
 
 public:
-    DiskQuota(QObject *parent = nullptr);
+    lliurexDiskQuota(QObject *parent = nullptr);
 
 public:
     /**
@@ -80,7 +80,7 @@ public:
     /**
      * Getter function for the model that is used in QML.
      */
-    QuotaListModel *model() const;
+    lliurexQuotaListModel *model() const;
 
 public Q_SLOTS:
     /**
@@ -114,10 +114,10 @@ private:
     bool m_quotaInstalled = true;
     bool m_cleanUpToolInstalled = true;
     TrayStatus m_status = PassiveStatus;
-    QString m_iconName = QStringLiteral("quota");
+    QString m_iconName = QStringLiteral("lliurexquota");
     QString m_toolTip;
     QString m_subToolTip;
-    QuotaListModel *m_model = nullptr;
+    lliurexQuotaListModel *m_model = nullptr;
 };
 
 #endif // PLASMA_DISK_QUOTA_H
