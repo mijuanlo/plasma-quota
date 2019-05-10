@@ -1,2 +1,2 @@
-module org.kde.plasma.private.diskquota
-plugin diskquotaplugin
+module org.kde.plasma.private.lliurexquota
+plugin lliurexquotaplugin

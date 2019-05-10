@@ -1,14 +1,14 @@
 [Desktop Entry]
-Name=Disk Quota
+Name=Lliurex Disk Quota
 Name[ar]=استخدام القرص
-Name[ca]=Quota de disc
-Name[ca@valencia]=Quota de disc
+Name[ca]=Lliurex Quota de disc
+Name[ca@valencia]=Lliurex Quota de disc
 Name[cs]=Kvóta disku
 Name[da]=Diskkvote
 Name[de]=Speicherplatzkontingent
 Name[el]=Μερίδιο δίσκου
 Name[en_GB]=Disk Quota
-Name[es]=Cuota de disco
+Name[es]=Lliurex Cuota de disco
 Name[et]=Kettakvoodid
 Name[eu]=Diskoaren kuota
 Name[fi]=Levykiintiö
@@ -78,7 +78,7 @@ Comment[uk]=Показати дані щодо квот на диску
 Comment[x-test]=xxShows details about disk quotaxx
 Comment[zh_CN]=显示磁盘配额细节
 Comment[zh_TW]=顯示關於磁碟大小限制的詳情
-Icon=quota
+Icon=lliurexquota
 Type=Service
 
 X-Plasma-API=declarativeappletscript
@@ -87,9 +87,9 @@ X-Plasma-NotificationArea=true
 X-Plasma-NotificationAreaCategory=SystemServices
 
 X-KDE-ServiceTypes=Plasma/Applet
-X-KDE-PluginInfo-Author=Dominik Haumann
-X-KDE-PluginInfo-Email=dhaumann@kde.org
-X-KDE-PluginInfo-Name=org.kde.plasma.diskquota
+X-KDE-PluginInfo-Author=
+X-KDE-PluginInfo-Email=
+X-KDE-PluginInfo-Name=org.kde.plasma.lliurexquota
 X-KDE-PluginInfo-Version=2.0
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Utilities

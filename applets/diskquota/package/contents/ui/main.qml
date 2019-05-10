@@ -23,7 +23,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 2.0 as Components
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-import org.kde.plasma.private.diskquota 1.0
+import org.kde.plasma.private.lliurexquota 1.0
 
 Item {
     id: quotaApplet

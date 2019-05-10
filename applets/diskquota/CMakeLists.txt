@@ -1,12 +1,12 @@
 
 #######################################################################################
 # Package
-plasma_install_package(package org.kde.plasma.diskquota)
+plasma_install_package(package org.kde.plasma.lliurexquota)
 
 
 #######################################################################################
 # Notes Library
-add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.diskquota")
+add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.lliurexquota")
 
 set(diskquota_SRCS
     plugin/plugin.cpp
@@ -15,15 +15,15 @@ set(diskquota_SRCS
     plugin/QuotaItem.cpp
 )
 
-add_library(diskquotaplugin SHARED ${diskquota_SRCS})
+add_library(lliurexquotaplugin SHARED ${diskquota_SRCS})
 
-target_link_libraries(diskquotaplugin
+target_link_libraries(lliurexquotaplugin
                       Qt5::Quick
                       KF5::CoreAddons
                       KF5::I18n)
 
-install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/diskquota)
-install(TARGETS diskquotaplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/diskquota)
+install(FILES plugin/qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/lliurexquota)
+install(TARGETS lliurexquotaplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/private/lliurexquota)
 
-install(FILES "icons/quota.svg"
+install(FILES "icons/lliurexquota.svg"
         DESTINATION ${DATAROOTDIR}/usr/share/plasma/desktoptheme/default/icons/)
