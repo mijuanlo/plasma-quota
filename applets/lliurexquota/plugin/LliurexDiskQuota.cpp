@@ -55,8 +55,8 @@ void LliurexDiskQuota::setQuotaInstalled(bool installed)
         if (!installed) {
             m_model->clear();
             setStatus(PassiveStatus);
-            setToolTip(i18n("Disk Quota"));
-            setSubToolTip(i18n("Please install 'quota'"));
+            setToolTip(i18n("Lliurex Disk Quota"));
+            setSubToolTip(i18n("Please install 'lliurex-quota'"));
         }
 
         emit quotaInstalledChanged();
@@ -162,8 +162,9 @@ void LliurexDiskQuota::updateQuota()
     }
 
     // for now, only filelight is supported
-    setCleanUpToolInstalled(! QStandardPaths::findExecutable(QStringLiteral("filelight")).isEmpty());
-
+    //setCleanUpToolInstalled(! QStandardPaths::findExecutable(QStringLiteral("filelight")).isEmpty());
+    setCleanUpToolInstalled(false);
+    
     // kill running process in case it hanged for whatever reason
     if (m_quotaProcess->state() != QProcess::NotRunning) {
         m_quotaProcess->kill();
@@ -171,15 +172,10 @@ void LliurexDiskQuota::updateQuota()
 
     // Try to run 'quota'
     const QStringList args{
-        QStringLiteral("--show-mntpoint"),     // second entry is e.g. '/home'
-        QStringLiteral("--hide-device"),       // hide e.g. /dev/sda3
-        QStringLiteral("--no-mixed-pathnames"),// trim leading slashes from NFSv4 mountpoints
-        QStringLiteral("--all-nfs"),           // show all mount points
-        QStringLiteral("--no-wrap"),           // do not wrap long lines
-        QStringLiteral("--quiet-refuse"),      // no not print error message when NFS server does not respond
+        QStringLiteral("--mq"),
     };
 
-    m_quotaProcess->start(QStringLiteral("quota"), args, QIODevice::ReadOnly);
+    m_quotaProcess->start(QStringLiteral("lliurex-quota"), args, QIODevice::ReadOnly);
 }
 
 void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
@@ -188,8 +184,8 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
 
     if (exitStatus != QProcess::NormalExit) {
         m_model->clear();
-        setToolTip(i18n("Disk Quota"));
-        setSubToolTip(i18n("Running quota failed"));
+        setToolTip(i18n("Lliurex Disk Quota"));
+        setSubToolTip(i18n("Running lliurex-quota failed"));
         return;
     }
 
@@ -220,16 +216,8 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
             continue;
         }
 
-        QStringList parts = line.split(QLatin1Char(' '), QString::SkipEmptyParts);
-        // valid lines range from 7 to 9 parts (grace not always there):
-        // Disk quotas for user dh (uid 1000):
-        //      Filesystem   blocks  quota    limit     grace   files    quota   limit   grace
-        //       /home     16296500  50000000 60000000          389155       0       0
-        //       /home     16296500* 50000000 60000000      6   389155       0       0
-        //       /home     16296500* 50000000 60000000      4   389155       0       0       5
-        //       ^...........we want these...........^
-        // NOTE: In case of a soft limit violation, a '*' is added in the used blocks.
-        //       Hence, the star is removed below, if applicable
+        QStringList parts = line.split(QLatin1Char(','), QString::SkipEmptyParts);
+        // True,lliurex,182,0 // parts: 0,1,2,3
 
         if (parts.size() < 4) {
             continue;
@@ -237,21 +225,18 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
 
         // 'quota' uses kilo bytes -> factor 1024
         // NOTE: int is not large enough, hence qint64
-        const qint64 used = parts[1].remove(QLatin1Char('*')).toLongLong() * 1024;
-        qint64 softLimit = parts[2].toLongLong() * 1024;
+
         const qint64 hardLimit = parts[3].toLongLong() * 1024;
-        if (softLimit == 0) { // softLimit might be unused (0)
-            softLimit = hardLimit;
-        }
-        const qint64 freeSize = softLimit - used;
-        const int percent = qMin(100, qMax(0, qRound(used * 100.0 / softLimit)));
+        const qint64 used = parts[2].toLongLong() * 1024;
+        const qint64 freeSize = hardLimit - used;
+        const int percent = qMin(100, qMax(0, qRound(used * 100.0 / hardLimit)));
 
         LliurexQuotaItem item;
         item.setIconName(iconNameForQuota(percent));
-        item.setMountPoint(parts[0]);
+        item.setMountPoint(QStringLiteral("Assigned space"));
         item.setUsage(percent);
-        item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", parts[0], percent));
-        item.setUsedString(i18nc("e.g.: 12 GiB of 20 GiB", "%1 of %2", fmt.formatByteSize(used), fmt.formatByteSize(softLimit)));
+        item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", QStringLiteral("Assigned space"), percent));
+        item.setUsedString(i18nc("e.g.: 12 GiB of 20 GiB", "%1 of %2", fmt.formatByteSize(used), fmt.formatByteSize(hardLimit)));
         item.setFreeString(i18nc("e.g.: 8 GiB free", "%1 free", fmt.formatByteSize(qMax(qint64(0), freeSize))));
 
         items.append(item);
@@ -297,5 +282,5 @@ void LliurexDiskQuota::openCleanUpTool(const QString &mountPoint)
         return;
     }
 
-    QProcess::startDetached(QStringLiteral("filelight"), {mountPoint});
+    //QProcess::startDetached(QStringLiteral("filelight"), {mountPoint});
 }
