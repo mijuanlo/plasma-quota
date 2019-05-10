@@ -21,7 +21,7 @@
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 
-class lliurexDiskQuotaPlugin : public QQmlExtensionPlugin
+class LliurexDiskQuotaPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")

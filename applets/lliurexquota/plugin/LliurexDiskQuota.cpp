@@ -15,9 +15,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#include "lliurexDiskQuota.h"
-#include "lliurexQuotaItem.h"
-#include "lliurexQuotaListModel.h"
+#include "LliurexDiskQuota.h"
+#include "LliurexQuotaItem.h"
+#include "LliurexQuotaListModel.h"
 
 #include <KLocalizedString>
 #include <KFormat>
@@ -27,27 +27,27 @@
 #include <QStandardPaths>
 // #include <QDebug>
 
-lliurexDiskQuota::lliurexDiskQuota(QObject *parent)
+LliurexDiskQuota::LliurexDiskQuota(QObject *parent)
     : QObject(parent)
     , m_timer(new QTimer(this))
     , m_quotaProcess(new QProcess(this))
-    , m_model(new lliurexQuotaListModel(this))
+    , m_model(new LliurexQuotaListModel(this))
 {
-    connect(m_timer, &QTimer::timeout, this, &lliurexDiskQuota::updateQuota);
+    connect(m_timer, &QTimer::timeout, this, &LliurexDiskQuota::updateQuota);
     m_timer->start(2 * 60 * 1000); // check every 2 minutes
 
     connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus))&QProcess::finished,
-            this, &lliurexDiskQuota::quotaProcessFinished);
+            this, &LliurexDiskQuota::quotaProcessFinished);
 
     updateQuota();
 }
 
-bool lliurexDiskQuota::quotaInstalled() const
+bool LliurexDiskQuota::quotaInstalled() const
 {
     return m_quotaInstalled;
 }
 
-void lliurexDiskQuota::setQuotaInstalled(bool installed)
+void LliurexDiskQuota::setQuotaInstalled(bool installed)
 {
     if (m_quotaInstalled != installed) {
         m_quotaInstalled = installed;
@@ -63,12 +63,12 @@ void lliurexDiskQuota::setQuotaInstalled(bool installed)
     }
 }
 
-bool lliurexDiskQuota::cleanUpToolInstalled() const
+bool LliurexDiskQuota::cleanUpToolInstalled() const
 {
     return m_cleanUpToolInstalled;
 }
 
-void lliurexDiskQuota::setCleanUpToolInstalled(bool installed)
+void LliurexDiskQuota::setCleanUpToolInstalled(bool installed)
 {
     if (m_cleanUpToolInstalled != installed) {
         m_cleanUpToolInstalled = installed;
@@ -76,12 +76,12 @@ void lliurexDiskQuota::setCleanUpToolInstalled(bool installed)
     }
 }
 
-lliurexDiskQuota::TrayStatus lliurexDiskQuota::status() const
+LliurexDiskQuota::TrayStatus LliurexDiskQuota::status() const
 {
     return m_status;
 }
 
-void lliurexDiskQuota::setStatus(TrayStatus status)
+void LliurexDiskQuota::setStatus(TrayStatus status)
 {
     if (m_status != status) {
         m_status = status;
@@ -89,12 +89,12 @@ void lliurexDiskQuota::setStatus(TrayStatus status)
     }
 }
 
-QString lliurexDiskQuota::iconName() const
+QString LliurexDiskQuota::iconName() const
 {
     return m_iconName;
 }
 
-void lliurexDiskQuota::setIconName(const QString &name)
+void LliurexDiskQuota::setIconName(const QString &name)
 {
     if (m_iconName != name) {
         m_iconName = name;
@@ -102,12 +102,12 @@ void lliurexDiskQuota::setIconName(const QString &name)
     }
 }
 
-QString lliurexDiskQuota::toolTip() const
+QString LliurexDiskQuota::toolTip() const
 {
     return m_toolTip;
 }
 
-void lliurexDiskQuota::setToolTip(const QString &toolTip)
+void LliurexDiskQuota::setToolTip(const QString &toolTip)
 {
     if (m_toolTip != toolTip) {
         m_toolTip = toolTip;
@@ -115,12 +115,12 @@ void lliurexDiskQuota::setToolTip(const QString &toolTip)
     }
 }
 
-QString lliurexDiskQuota::subToolTip() const
+QString LliurexDiskQuota::subToolTip() const
 {
     return m_subToolTip;
 }
 
-void lliurexDiskQuota::setSubToolTip(const QString &subToolTip)
+void LliurexDiskQuota::setSubToolTip(const QString &subToolTip)
 {
     if (m_subToolTip != subToolTip) {
         m_subToolTip = subToolTip;
@@ -153,7 +153,7 @@ static bool isQuotaLine(const QString &line)
     return false;
 }
 
-void lliurexDiskQuota::updateQuota()
+void LliurexDiskQuota::updateQuota()
 {
     const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("lliurex-quota")).isEmpty();
     setQuotaInstalled(quotaFound);
@@ -182,7 +182,7 @@ void lliurexDiskQuota::updateQuota()
     m_quotaProcess->start(QStringLiteral("quota"), args, QIODevice::ReadOnly);
 }
 
-void lliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
+void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     Q_UNUSED(exitCode)
 
@@ -211,7 +211,7 @@ void lliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
     // format class needed for GiB/MiB/KiB formatting
     KFormat fmt;
     int maxQuota = 0;
-    QVector<lliurexQuotaItem> items;
+    QVector<LliurexQuotaItem> items;
 
     // assumption: Filesystem starts with slash
     for (const QString &line : lines) {
@@ -246,7 +246,7 @@ void lliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
         const qint64 freeSize = softLimit - used;
         const int percent = qMin(100, qMax(0, qRound(used * 100.0 / softLimit)));
 
-        lliurexQuotaItem item;
+        LliurexQuotaItem item;
         item.setIconName(iconNameForQuota(percent));
         item.setMountPoint(parts[0]);
         item.setUsage(percent);
@@ -286,12 +286,12 @@ void lliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
     m_model->updateItems(items);
 }
 
-lliurexQuotaListModel *lliurexDiskQuota::model() const
+LliurexQuotaListModel *LliurexDiskQuota::model() const
 {
     return m_model;
 }
 
-void lliurexDiskQuota::openCleanUpTool(const QString &mountPoint)
+void LliurexDiskQuota::openCleanUpTool(const QString &mountPoint)
 {
     if (!cleanUpToolInstalled()) {
         return;

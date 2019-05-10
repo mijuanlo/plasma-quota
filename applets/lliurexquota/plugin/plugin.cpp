@@ -16,14 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 #include "plugin.h"
-#include "lliurexDiskQuota.h"
-#include "lliurexQuotaListModel.h"
+#include "LliurexDiskQuota.h"
+#include "LliurexQuotaListModel.h"
 
 #include <QtQml>
 
-void lliurexDiskQuotaPlugin::registerTypes (const char *uri)
+void LliurexDiskQuotaPlugin::registerTypes (const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.lliurexquota"));
-    qmlRegisterType<lliurexDiskQuota>(uri, 1, 0, "lliurexDiskQuota");
-    qmlRegisterType<lliurexQuotaListModel>(uri, 1, 0, "lliurexQuotaListModel");
+    qmlRegisterType<LliurexDiskQuota>(uri, 1, 0, "LliurexDiskQuota");
+    qmlRegisterType<LliurexQuotaListModel>(uri, 1, 0, "LliurexQuotaListModel");
 }

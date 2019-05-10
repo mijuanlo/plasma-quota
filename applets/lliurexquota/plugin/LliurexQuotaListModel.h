@@ -21,17 +21,17 @@
 #include <QAbstractListModel>
 #include <QVector>
 
-#include "lliurexQuotaItem.h"
+#include "LliurexQuotaItem.h"
 
 /**
  * Data model holding disk quota items.
  */
-class lliurexQuotaListModel : public QAbstractListModel
+class LliurexQuotaListModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    lliurexQuotaListModel(QObject *parent = nullptr);
+    LliurexQuotaListModel(QObject *parent = nullptr);
 
 public: // QAbstractListModel overrides
     /**
@@ -69,7 +69,7 @@ public: // additional helper functions
      * Merges @p items into the existing quota item list. Old items that are
      * not available in @p items anymore are deleted.
      */
-    void updateItems(const QVector<lliurexQuotaItem> &items);
+    void updateItems(const QVector<LliurexQuotaItem> &items);
 
     /**
      * Clears all items in the model.
@@ -77,7 +77,7 @@ public: // additional helper functions
     void clear();
 
 private:
-    QVector<lliurexQuotaItem> m_items;
+    QVector<LliurexQuotaItem> m_items;
 };
 
 #endif // PLASMA_LLIUREX_QUOTA_LIST_MODEL_H

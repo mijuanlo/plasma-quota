@@ -24,10 +24,10 @@
 /**
  * Class that holds all quota info for one mount point.
  */
-class lliurexQuotaItem
+class LliurexQuotaItem
 {
 public:
-    lliurexQuotaItem();
+    LliurexQuotaItem();
 
     QString mountPoint() const;
     void setMountPoint(const QString &mountPoint);
@@ -47,8 +47,8 @@ public:
     QString freeString() const;
     void setFreeString(const QString &freeString);
 
-    bool operator==(const lliurexQuotaItem &other) const;
-    bool operator!=(const lliurexQuotaItem &other) const;
+    bool operator==(const LliurexQuotaItem &other) const;
+    bool operator!=(const LliurexQuotaItem &other) const;
 
 private:
     QString m_iconName;
@@ -59,6 +59,6 @@ private:
     QString m_freeString;
 };
 
-Q_DECLARE_METATYPE(lliurexQuotaItem)
+Q_DECLARE_METATYPE(LliurexQuotaItem)
 
 #endif // PLASMA_LLIUREX_QUOTA_ITEM_H

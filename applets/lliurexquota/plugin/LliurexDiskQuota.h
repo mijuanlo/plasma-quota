@@ -22,14 +22,14 @@
 #include <QProcess>
 
 class QTimer;
-class lliurexQuotaListModel;
+class LliurexQuotaListModel;
 
 /**
  * Class monitoring the file system quota.
  * The monitoring is performed through a timer, running the 'quota'
  * command line tool.
  */
-class lliurexDiskQuota : public QObject
+class LliurexDiskQuota : public QObject
 {
     Q_OBJECT
 
@@ -41,12 +41,12 @@ class lliurexDiskQuota : public QObject
     Q_PROPERTY(QString subToolTip READ subToolTip NOTIFY subToolTipChanged)
     Q_PROPERTY(QString iconName READ iconName NOTIFY iconNameChanged)
 
-    Q_PROPERTY(lliurexQuotaListModel* model READ model CONSTANT)
+    Q_PROPERTY(LliurexQuotaListModel* model READ model CONSTANT)
 
     Q_ENUMS(TrayStatus)
 
 public:
-    lliurexDiskQuota(QObject *parent = nullptr);
+    LliurexDiskQuota(QObject *parent = nullptr);
 
 public:
     /**
@@ -80,7 +80,7 @@ public:
     /**
      * Getter function for the model that is used in QML.
      */
-    lliurexQuotaListModel *model() const;
+    LliurexQuotaListModel *model() const;
 
 public Q_SLOTS:
     /**
@@ -117,7 +117,7 @@ private:
     QString m_iconName = QStringLiteral("lliurexquota");
     QString m_toolTip;
     QString m_subToolTip;
-    lliurexQuotaListModel *m_model = nullptr;
+    LliurexQuotaListModel *m_model = nullptr;
 };
 
 #endif // PLASMA_DISK_QUOTA_H

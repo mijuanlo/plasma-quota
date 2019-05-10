@@ -15,11 +15,11 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-#include "lliurexQuotaListModel.h"
+#include "LliurexQuotaListModel.h"
 
 #include <QDebug>
 
-lliurexQuotaListModel::lliurexQuotaListModel(QObject *parent)
+LliurexQuotaListModel::LliurexQuotaListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
 }
@@ -38,7 +38,7 @@ namespace {
     };
 }
 
-QHash<int, QByteArray> lliurexQuotaListModel::roleNames() const
+QHash<int, QByteArray> LliurexQuotaListModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[DetailsRole] = "details";
@@ -51,7 +51,7 @@ QHash<int, QByteArray> lliurexQuotaListModel::roleNames() const
     return roles;
 }
 
-QVariant lliurexQuotaListModel::data(const QModelIndex &index, int role) const
+QVariant LliurexQuotaListModel::data(const QModelIndex &index, int role) const
 {
     if (! index.isValid() || index.row() >= m_items.size()) {
         return QVariant();
@@ -71,7 +71,7 @@ QVariant lliurexQuotaListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-int lliurexQuotaListModel::rowCount(const QModelIndex &index) const
+int LliurexQuotaListModel::rowCount(const QModelIndex &index) const
 {
     if (! index.isValid()) {
         return m_items.size();
@@ -80,13 +80,13 @@ int lliurexQuotaListModel::rowCount(const QModelIndex &index) const
     return 0;
 }
 
-bool lliurexQuotaListModel::setData(const QModelIndex &index, const QVariant &variant, int role)
+bool LliurexQuotaListModel::setData(const QModelIndex &index, const QVariant &variant, int role)
 {
     Q_UNUSED(role)
 
     const int row = index.row();
     if (index.isValid() && row < m_items.size()) {
-        const lliurexQuotaItem item = variant.value<lliurexQuotaItem>();
+        const LliurexQuotaItem item = variant.value<LliurexQuotaItem>();
 
         // This assert makes sure that changing items modify the correct item:
         // therefore, the unique identifier 'mountPoint()' is used. If that
@@ -104,7 +104,7 @@ bool lliurexQuotaListModel::setData(const QModelIndex &index, const QVariant &va
     return false;
 }
 
-bool lliurexQuotaListModel::insertRows(int row, int count, const QModelIndex &parent)
+bool LliurexQuotaListModel::insertRows(int row, int count, const QModelIndex &parent)
 {
     // only top-level items are supported
     if (parent.isValid()) {
@@ -112,13 +112,13 @@ bool lliurexQuotaListModel::insertRows(int row, int count, const QModelIndex &pa
     }
 
     beginInsertRows(QModelIndex(), row, row + count - 1);
-    m_items.insert(row, count, lliurexQuotaItem());
+    m_items.insert(row, count, LliurexQuotaItem());
     endInsertRows();
 
     return true;
 }
 
-bool lliurexQuotaListModel::removeRows(int row, int count, const QModelIndex &parent)
+bool LliurexQuotaListModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     // only top-level items are valid
     if (parent.isValid() || (row + count) >= m_items.size()) {
@@ -132,7 +132,7 @@ bool lliurexQuotaListModel::removeRows(int row, int count, const QModelIndex &pa
     return true;
 }
 
-void lliurexQuotaListModel::clear()
+void LliurexQuotaListModel::clear()
 {
     beginResetModel();
     m_items.clear();
@@ -140,7 +140,7 @@ void lliurexQuotaListModel::clear()
 }
 
 namespace {
-    QStringList mountPoints(const QVector<lliurexQuotaItem> &items)
+    QStringList mountPoints(const QVector<LliurexQuotaItem> &items)
     {
         QStringList list;
         for (auto & item : items) {
@@ -149,7 +149,7 @@ namespace {
         return list;
     }
 
-    int indexOfMountPoint(const QString &mountPoint, const QVector<lliurexQuotaItem> &items)
+    int indexOfMountPoint(const QString &mountPoint, const QVector<LliurexQuotaItem> &items)
     {
         for (int i = 0; i < items.size(); ++i) {
             if (mountPoint == items[i].mountPoint()) {
@@ -160,7 +160,7 @@ namespace {
     }
 }
 
-void lliurexQuotaListModel::updateItems(const QVector<lliurexQuotaItem> &items)
+void LliurexQuotaListModel::updateItems(const QVector<LliurexQuotaItem> &items)
 {
     QStringList unusedMountPoints = mountPoints(m_items);
 
