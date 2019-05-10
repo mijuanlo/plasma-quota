@@ -27,5 +27,5 @@ install(TARGETS lliurexquotaplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma
 
 install(FILES "icons/lliurexquota.svg"
         DESTINATION ${DATAROOTDIR}/usr/share/plasma/desktoptheme/default/icons/)
-install(FILES "icons/org.kde.plasma.diskquota.svg "
+install(FILES "icons/org.kde.plasma.lliurexquota.svg"
         DESTINATION ${DATAROOTDIR}/usr/share/icons/breeze/applets/256/ )
