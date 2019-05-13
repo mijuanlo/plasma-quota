@@ -120,4 +120,4 @@ private:
     LliurexQuotaListModel *m_model = nullptr;
 };
 
-#endif // PLASMA_DISK_QUOTA_H
+#endif // PLASMA_LLIUREX_DISK_QUOTA_H

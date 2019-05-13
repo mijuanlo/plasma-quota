@@ -42,7 +42,7 @@ Components.ListItem {
     }
 
     onClicked: {
-        diskQuota.openCleanUpTool(mountPoint);
+        lliurexDiskQuota.openCleanUpTool(mountPoint);
     }
 
     RowLayout {

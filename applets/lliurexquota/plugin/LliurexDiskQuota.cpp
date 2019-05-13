@@ -25,7 +25,7 @@
 #include <QTimer>
 #include <QRegularExpression>
 #include <QStandardPaths>
-// #include <QDebug>
+#include <QDebug>
 
 LliurexDiskQuota::LliurexDiskQuota(QObject *parent)
     : QObject(parent)
@@ -38,21 +38,25 @@ LliurexDiskQuota::LliurexDiskQuota(QObject *parent)
 
     connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus))&QProcess::finished,
             this, &LliurexDiskQuota::quotaProcessFinished);
-
+    qDebug() << "STARTUP " << m_iconName;
     updateQuota();
 }
 
 bool LliurexDiskQuota::quotaInstalled() const
 {
+    qDebug() << "getting m_quotaInstalled: " << m_quotaInstalled;
     return m_quotaInstalled;
 }
 
 void LliurexDiskQuota::setQuotaInstalled(bool installed)
 {
+    qDebug() << "setting INSTALLED TO " << installed;
     if (m_quotaInstalled != installed) {
+        qDebug() << "setting _mquotaInstalled " << installed;
         m_quotaInstalled = installed;
 
         if (!installed) {
+            qDebug() << "running actions when not installed";
             m_model->clear();
             setStatus(PassiveStatus);
             setToolTip(i18n("Lliurex Disk Quota"));
@@ -91,11 +95,13 @@ void LliurexDiskQuota::setStatus(TrayStatus status)
 
 QString LliurexDiskQuota::iconName() const
 {
+    qDebug() << "getting iconName: " << m_iconName;
     return m_iconName;
 }
 
 void LliurexDiskQuota::setIconName(const QString &name)
 {
+    qDebug() << "setting iconName: " << name;
     if (m_iconName != name) {
         m_iconName = name;
         emit iconNameChanged();
@@ -104,11 +110,13 @@ void LliurexDiskQuota::setIconName(const QString &name)
 
 QString LliurexDiskQuota::toolTip() const
 {
+    qDebug() << "getting toolTip: " << m_toolTip;
     return m_toolTip;
 }
 
 void LliurexDiskQuota::setToolTip(const QString &toolTip)
 {
+    qDebug() << "setting toolTip: " << toolTip;
     if (m_toolTip != toolTip) {
         m_toolTip = toolTip;
         emit toolTipChanged();
@@ -130,6 +138,7 @@ void LliurexDiskQuota::setSubToolTip(const QString &subToolTip)
 
 static QString iconNameForQuota(int quota)
 {
+    qDebug() << "getting iconNameForQuota: " << quota;
     if (quota < 50) {
         return QStringLiteral("quota");
     } else if (quota < 75) {
@@ -156,6 +165,8 @@ static bool isQuotaLine(const QString &line)
 void LliurexDiskQuota::updateQuota()
 {
     const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("lliurex-quota")).isEmpty();
+    qDebug() << "FOUND QUOTA RESULT: " << quotaFound ;
+    qDebug() << "ICON " << m_iconName;
     setQuotaInstalled(quotaFound);
     if (!quotaFound) {
         return;
@@ -172,17 +183,18 @@ void LliurexDiskQuota::updateQuota()
 
     // Try to run 'quota'
     const QStringList args{
-        QStringLiteral("--mq"),
+        QStringLiteral("-mq"),
     };
-
+    qDebug() << "initiating lliurex-quota";
     m_quotaProcess->start(QStringLiteral("lliurex-quota"), args, QIODevice::ReadOnly);
 }
 
 void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     Q_UNUSED(exitCode)
-
+    qDebug() << "EXITTING PROCESS LLIUREX_QUOTA " ;
     if (exitStatus != QProcess::NormalExit) {
+        qDebug() << "WrOng EXITCODE" ;
         m_model->clear();
         setToolTip(i18n("Lliurex Disk Quota"));
         setSubToolTip(i18n("Running lliurex-quota failed"));

@@ -26,16 +26,16 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.private.lliurexquota 1.0
 
 Item {
-    id: quotaApplet
+    id: lliurexquotaApplet
 
     Layout.minimumWidth: units.gridUnit * 10
     Layout.minimumHeight: units.gridUnit * 2
 
     Plasmoid.status: {
-        switch (LliurexDiskQuota.status) {
-            case LliurexDiskQuota.NeedsAttentionStatus:
+        switch (lliurexDiskQuota.status) {
+            case lliurexDiskQuota.NeedsAttentionStatus:
                 return PlasmaCore.Types.NeedsAttentionStatus
-            case LliurexDiskQuota.ActiveStatus:
+            case lliurexDiskQuota.ActiveStatus:
                 return PlasmaCore.Types.ActiveStatus
         }
         // default case: LliurexDiskQuota.PassiveStatus
@@ -45,13 +45,13 @@ Item {
     Plasmoid.switchWidth: units.gridUnit * 10
     Plasmoid.switchHeight: units.gridUnit * 10
 
-    Plasmoid.icon: LliurexDiskQuota.iconName
-    Plasmoid.toolTipMainText: LliurexDiskQuota.toolTip
-    Plasmoid.toolTipSubText: LliurexDiskQuota.subToolTip
+    Plasmoid.icon: lliurexDiskQuota.iconName
+    Plasmoid.toolTipMainText: lliurexDiskQuota.toolTip
+    Plasmoid.toolTipSubText: lliurexDiskQuota.subToolTip
 
     Component.onCompleted: plasmoid.removeAction("configure")
 
-    LliurexDiskQuota {
+    LliurexDiskQuota { // C++ class , this references methods through id
         id: lliurexDiskQuota
     }
 
@@ -63,19 +63,20 @@ Item {
 
         // HACK: connection to reset currentIndex to -1. Without this, when
         // uninstalling filelight, the selection highlight remains fixed (which is wrong)
-        Connections {
-            target: LliurexDiskQuota
-            onCleanUpToolInstalledChanged: {
-                if (!LliurexDiskQuota.cleanUpToolInstalled) {
-                    listView.currentIndex = -1
-                }
-            }
-        }
+//        Connections {
+//            target: lliurexDiskQuota
+//            onCleanUpToolInstalledChanged: {
+//                if (!lliurexDiskQuota.cleanUpToolInstalled) {
+//                    listView.currentIndex = -1
+//                }
+//            }
+//        }
+
 
         Components.Label {
-            visible: !LliurexDiskQuota.quotaInstalled || listView.count == 0
+            visible: !lliurexDiskQuota.quotaInstalled || listView.count == 0
             anchors.fill: parent
-            text: LliurexDiskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
+            text: lliurexDiskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -84,14 +85,14 @@ Item {
             anchors.fill: parent
             ListView {
                 id: listView
-                model: LliurexDiskQuota.model
+                model: lliurexDiskQuota.model
                 boundsBehavior: Flickable.StopAtBounds
                 highlight: Components.Highlight { }
                 highlightMoveDuration: 0
                 highlightResizeDuration: 0
                 currentIndex: -1
                 delegate: ListDelegateItem {
-                    enabled: LliurexDiskQuota.cleanUpToolInstalled
+                    enabled: lliurexDiskQuota.cleanUpToolInstalled
                     width: listView.width
                     mountPoint: model.mountPoint
                     details: model.details
