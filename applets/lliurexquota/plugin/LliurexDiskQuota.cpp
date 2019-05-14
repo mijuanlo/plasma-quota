@@ -34,29 +34,24 @@ LliurexDiskQuota::LliurexDiskQuota(QObject *parent)
     , m_model(new LliurexQuotaListModel(this))
 {
     connect(m_timer, &QTimer::timeout, this, &LliurexDiskQuota::updateQuota);
-    m_timer->start(2 * 60 * 1000); // check every 2 minutes
+    m_timer->start(1 * 60 * 1000); // check every 2 minutes
 
     connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus))&QProcess::finished,
             this, &LliurexDiskQuota::quotaProcessFinished);
-    qDebug() << "STARTUP " << m_iconName;
     updateQuota();
 }
 
 bool LliurexDiskQuota::quotaInstalled() const
 {
-    qDebug() << "getting m_quotaInstalled: " << m_quotaInstalled;
     return m_quotaInstalled;
 }
 
 void LliurexDiskQuota::setQuotaInstalled(bool installed)
 {
-    qDebug() << "setting INSTALLED TO " << installed;
     if (m_quotaInstalled != installed) {
-        qDebug() << "setting _mquotaInstalled " << installed;
         m_quotaInstalled = installed;
 
         if (!installed) {
-            qDebug() << "running actions when not installed";
             m_model->clear();
             setStatus(PassiveStatus);
             setToolTip(i18n("Lliurex Disk Quota"));
@@ -82,26 +77,27 @@ void LliurexDiskQuota::setCleanUpToolInstalled(bool installed)
 
 LliurexDiskQuota::TrayStatus LliurexDiskQuota::status() const
 {
+    qDebug() << "Getting status " << m_status;
     return m_status;
 }
 
-void LliurexDiskQuota::setStatus(TrayStatus status)
+void LliurexDiskQuota::setStatus(LliurexDiskQuota::TrayStatus status)
 {
     if (m_status != status) {
         m_status = status;
+        qDebug() << "Setting status (with emmiting) " << status;
         emit statusChanged();
     }
+    qDebug() << "Setting status without changes with current " << m_status << " vs " << status;
 }
 
 QString LliurexDiskQuota::iconName() const
 {
-    qDebug() << "getting iconName: " << m_iconName;
     return m_iconName;
 }
 
 void LliurexDiskQuota::setIconName(const QString &name)
 {
-    qDebug() << "setting iconName: " << name;
     if (m_iconName != name) {
         m_iconName = name;
         emit iconNameChanged();
@@ -110,13 +106,11 @@ void LliurexDiskQuota::setIconName(const QString &name)
 
 QString LliurexDiskQuota::toolTip() const
 {
-    qDebug() << "getting toolTip: " << m_toolTip;
     return m_toolTip;
 }
 
 void LliurexDiskQuota::setToolTip(const QString &toolTip)
 {
-    qDebug() << "setting toolTip: " << toolTip;
     if (m_toolTip != toolTip) {
         m_toolTip = toolTip;
         emit toolTipChanged();
@@ -138,26 +132,26 @@ void LliurexDiskQuota::setSubToolTip(const QString &subToolTip)
 
 static QString iconNameForQuota(int quota)
 {
-    qDebug() << "getting iconNameForQuota: " << quota;
     if (quota < 50) {
-        return QStringLiteral("quota");
+        return QStringLiteral("lliurexquota");
     } else if (quota < 75) {
-        return QStringLiteral("quota-low");
+        return QStringLiteral("lliurexquota-low");
     } else if (quota < 90) {
-        return QStringLiteral("quota-high");
+        return QStringLiteral("lliurexquota-high");
     }
 
     // quota >= 90%
-    return QStringLiteral("quota-critical");
+    return QStringLiteral("lliurexquota-critical");
 }
 
 static bool isQuotaLine(const QString &line)
 {
-    const int iMax = line.size();
-    for (int i = 0; i < iMax; ++i) {
-        if (!line[i].isSpace() && line[i] == QLatin1Char('/')) {
+    QStringList parts = line.split(QLatin1Char(','), QString::SkipEmptyParts);
+    if (parts.size() == 4){
+        if (parts[0] == "True"){
             return true;
         }
+        return false;
     }
     return false;
 }
@@ -165,8 +159,6 @@ static bool isQuotaLine(const QString &line)
 void LliurexDiskQuota::updateQuota()
 {
     const bool quotaFound = ! QStandardPaths::findExecutable(QStringLiteral("lliurex-quota")).isEmpty();
-    qDebug() << "FOUND QUOTA RESULT: " << quotaFound ;
-    qDebug() << "ICON " << m_iconName;
     setQuotaInstalled(quotaFound);
     if (!quotaFound) {
         return;
@@ -175,7 +167,7 @@ void LliurexDiskQuota::updateQuota()
     // for now, only filelight is supported
     //setCleanUpToolInstalled(! QStandardPaths::findExecutable(QStringLiteral("filelight")).isEmpty());
     setCleanUpToolInstalled(false);
-    
+
     // kill running process in case it hanged for whatever reason
     if (m_quotaProcess->state() != QProcess::NotRunning) {
         m_quotaProcess->kill();
@@ -185,16 +177,16 @@ void LliurexDiskQuota::updateQuota()
     const QStringList args{
         QStringLiteral("-mq"),
     };
-    qDebug() << "initiating lliurex-quota";
+    qDebug() << "Initiating lliurex-quota";
     m_quotaProcess->start(QStringLiteral("lliurex-quota"), args, QIODevice::ReadOnly);
 }
 
 void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     Q_UNUSED(exitCode)
-    qDebug() << "EXITTING PROCESS LLIUREX_QUOTA " ;
+    qDebug() << "Ending process lliurex-quota";
     if (exitStatus != QProcess::NormalExit) {
-        qDebug() << "WrOng EXITCODE" ;
+        qDebug() << "Wrong EXITCODE" ;
         m_model->clear();
         setToolTip(i18n("Lliurex Disk Quota"));
         setSubToolTip(i18n("Running lliurex-quota failed"));
@@ -203,7 +195,7 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
 
     // get quota output
     const QString rawData = QString::fromLocal8Bit(m_quotaProcess->readAllStandardOutput());
-//     qDebug() << rawData;
+    qDebug() << "Result from lliurex-quota cmd:" << rawData;
 
     const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
     // Testing
@@ -223,17 +215,13 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
 
     // assumption: Filesystem starts with slash
     for (const QString &line : lines) {
-//         qDebug() << line << isQuotaLine(line);
+        qDebug() << "Procesing line + isQuotaLine" << line << " + " << isQuotaLine(line);
         if (!isQuotaLine(line)) {
             continue;
         }
 
         QStringList parts = line.split(QLatin1Char(','), QString::SkipEmptyParts);
         // True,lliurex,182,0 // parts: 0,1,2,3
-
-        if (parts.size() < 4) {
-            continue;
-        }
 
         // 'quota' uses kilo bytes -> factor 1024
         // NOTE: int is not large enough, hence qint64
@@ -265,10 +253,20 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
     // update icon in panel
     setIconName(iconNameForQuota(maxQuota));
 
+    if (maxQuota < 50){
+        qDebug() << "Setting status passive";
+        setStatus(PassiveStatus);
+    }else if (maxQuota < 90){
+        qDebug() << "Setting status active";
+        setStatus(ActiveStatus);
+    }else{
+        qDebug() << "Setting status need attention";
+        setStatus(NeedsAttentionStatus);
+    }
     // update status
-    setStatus(maxQuota < 50 ? PassiveStatus
-            : maxQuota < 98 ? ActiveStatus
-            : NeedsAttentionStatus);
+    //setStatus(maxQuota < 50 ? PassiveStatus
+    //        : maxQuota < 98 ? ActiveStatus
+    //        : NeedsAttentionStatus);
 
     if (!items.isEmpty()) {
         setToolTip(i18nc("example: Quota: 83% used",

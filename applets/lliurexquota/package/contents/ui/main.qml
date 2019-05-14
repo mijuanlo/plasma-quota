@@ -31,17 +31,22 @@ Item {
     Layout.minimumWidth: units.gridUnit * 10
     Layout.minimumHeight: units.gridUnit * 2
 
+    LliurexDiskQuota { // C++ class , this references methods through id
+        id: lliurexDiskQuota
+    }
+
     Plasmoid.status: {
         switch (lliurexDiskQuota.status) {
             case lliurexDiskQuota.NeedsAttentionStatus:
                 return PlasmaCore.Types.NeedsAttentionStatus
             case lliurexDiskQuota.ActiveStatus:
                 return PlasmaCore.Types.ActiveStatus
+            case lliurexDiskQuota.PassiveStatus:
+                return PlasmaCore.Types.PassiveStatus
         }
         // default case: LliurexDiskQuota.PassiveStatus
-        return PlasmaCore.Types.PassiveStatus
+        return PlasmaCore.Types.ActiveStatus
     }
-
     Plasmoid.switchWidth: units.gridUnit * 10
     Plasmoid.switchHeight: units.gridUnit * 10
 
@@ -51,10 +56,7 @@ Item {
 
     Component.onCompleted: plasmoid.removeAction("configure")
 
-    LliurexDiskQuota { // C++ class , this references methods through id
-        id: lliurexDiskQuota
-    }
-
+    
     Plasmoid.fullRepresentation: Item {
         id: root
 
@@ -63,15 +65,14 @@ Item {
 
         // HACK: connection to reset currentIndex to -1. Without this, when
         // uninstalling filelight, the selection highlight remains fixed (which is wrong)
-//        Connections {
-//            target: lliurexDiskQuota
-//            onCleanUpToolInstalledChanged: {
-//                if (!lliurexDiskQuota.cleanUpToolInstalled) {
-//                    listView.currentIndex = -1
-//                }
-//            }
-//        }
-
+        Connections {
+            target: lliurexDiskQuota
+            onCleanUpToolInstalledChanged: {
+                if (!lliurexDiskQuota.cleanUpToolInstalled) {
+                    listView.currentIndex = -1
+                }
+            }
+        }
 
         Components.Label {
             visible: !lliurexDiskQuota.quotaInstalled || listView.count == 0
