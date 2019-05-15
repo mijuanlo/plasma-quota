@@ -36,7 +36,7 @@ Item {
     }
 
     Plasmoid.status: {
-        /* Warn! Enum types are accesed through ClassName not ObjectName
+        /* Warn! Enum types are accesed through ClassName not ObjectName */
         switch (lliurexDiskQuota.status) {
             case LliurexDiskQuota.NeedsAttentionStatus:
                 return PlasmaCore.Types.NeedsAttentionStatus

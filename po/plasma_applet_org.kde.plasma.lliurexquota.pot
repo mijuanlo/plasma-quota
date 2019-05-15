@@ -3,20 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-15 14:31+0200\n"
-"PO-Revision-Date: 2019-05-15 16:52+0200\n"
-"Language-Team: \n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es\n"
 
 #: applets/lliurexquota/package/contents/ui/main.qml
 msgid ""
@@ -24,50 +23,47 @@ msgid ""
 "\n"
 "Please install 'lliurex-quota'."
 msgstr ""
-"Lliurex-quota no encontrado.\n"
-"\n"
-"Debes instalar 'lliurex-quota'."
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:57
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:188
 msgid "Lliurex Disk Quota"
-msgstr "Lliurex Quota"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:58
 msgid "Please install 'lliurex-quota'"
-msgstr "Por favor instala 'lliurex-quota'"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:189
 msgid "Running lliurex-quota failed"
-msgstr "Ejecución fallida de 'lliurex-quota'"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:233
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
 msgid "Assigned space"
-msgstr "Espacio asignado"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
 #, c-format
 msgid "usage of quota, e.g.: '/home/bla: 38% used'"
-msgstr "/home: 10% utilizado"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:236
 msgid "e.g.: 12 GiB of 20 GiB"
-msgstr "1 GiB de 20 GiB"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:237
 msgid "e.g.: 8 GiB free"
-msgstr "1 GiB libre"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:269
 #, c-format
 msgid "example: Quota: 83% used"
-msgstr "Cuota: 1% utilizado"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:273
 msgid "Disk Quota"
-msgstr "Lliurex Quota"
+msgstr ""
 
 #: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:274
 msgid "No quota restrictions found."
-msgstr "No hay cuotas aplicadas."
+msgstr ""

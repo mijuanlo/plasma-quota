@@ -212,7 +212,7 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
 
     // assumption: Filesystem starts with slash
     for (const QString &line : lines) {
-        qDebug() << "Procesing line + isQuotaLine" << line << " + " << isQuotaLine(line);
+        //qDebug() << "Procesing line + isQuotaLine" << line << " + " << isQuotaLine(line);
         if (!isQuotaLine(line)) {
             continue;
         }
@@ -230,9 +230,9 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
 
         LliurexQuotaItem item;
         item.setIconName(iconNameForQuota(percent));
-        item.setMountPoint(QStringLiteral("Assigned space"));
+        item.setMountPoint(i18n("Assigned space"));
         item.setUsage(percent);
-        item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", QStringLiteral("Assigned space"), percent));
+        item.setMountString(i18nc("usage of quota, e.g.: '/home/bla: 38\% used'", "%1: %2% used", i18n("Assigned space"), percent));
         item.setUsedString(i18nc("e.g.: 12 GiB of 20 GiB", "%1 of %2", fmt.formatByteSize(used), fmt.formatByteSize(hardLimit)));
         item.setFreeString(i18nc("e.g.: 8 GiB free", "%1 free", fmt.formatByteSize(qMax(qint64(0), freeSize))));
 

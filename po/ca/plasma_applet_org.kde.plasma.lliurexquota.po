@@ -1,76 +1,73 @@
-# Translation of plasma_applet_org.kde.plasma.diskquota.po to Catalan
-# Copyright (C) 2015-2016 This_file_is_part_of_KDE
-# This file is distributed under the license LGPL version 2.1 or
-# version 3 or later versions approved by the membership of KDE e.V.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# Josep Ma. Ferrer <txemaq@gmail.com>, 2015, 2016.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
-"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
-"POT-Creation-Date: 2016-11-19 20:20+0100\n"
-"PO-Revision-Date: 2016-11-20 01:21+0100\n"
-"Last-Translator: Josep Ma. Ferrer <txemaq@gmail.com>\n"
-"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
-"Language: ca\n"
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-15 14:31+0200\n"
+"PO-Revision-Date: 2019-05-15 16:56+0200\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ca_ES\n"
 
-#: package/contents/ui/main.qml:78 plugin/DiskQuota.cpp:282
-#, kde-format
-msgid "No quota restrictions found."
-msgstr "No s'ha trobat cap restricció de quota."
-
-#: package/contents/ui/main.qml:78
-#, kde-format
+#: applets/lliurexquota/package/contents/ui/main.qml
 msgid ""
 "Quota tool not found.\n"
 "\n"
-"Please install 'quota'."
+"Please install 'lliurex-quota'."
 msgstr ""
-"No s'ha trobat l'eina de quota.\n"
+"No he trovat 'lliurex-quota'.\n"
 "\n"
-"Instal·leu el «quota»."
+"Per favor instal·la 'lliurex-quota'."
 
-#: plugin/DiskQuota.cpp:58 plugin/DiskQuota.cpp:191 plugin/DiskQuota.cpp:281
-#, kde-format
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:57
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:188
+msgid "Lliurex Disk Quota"
+msgstr "Lliurex Disk Quota"
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:58
+msgid "Please install 'lliurex-quota'"
+msgstr "Per favor instal·la 'lliurex-quota'"
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:189
+msgid "Running lliurex-quota failed"
+msgstr "Execució de lliurex-quota sense exit."
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:233
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+msgid "Assigned space"
+msgstr "Espai assignat"
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+#, c-format
+msgid "usage of quota, e.g.: '/home/bla: 38% used'"
+msgstr "/home: 1% utilitzat"
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:236
+msgid "e.g.: 12 GiB of 20 GiB"
+msgstr "1 GiB de 20 GiB"
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:237
+msgid "e.g.: 8 GiB free"
+msgstr "1 GiB lliure"
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:269
+#, c-format
+msgid "example: Quota: 83% used"
+msgstr "Quota: 1% utilitzat"
+
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:273
 msgid "Disk Quota"
-msgstr "Quota de disc"
+msgstr "Lliurex Disk Quota"
 
-#: plugin/DiskQuota.cpp:59
-#, kde-format
-msgid "Please install 'quota'"
-msgstr "Instal·leu el «quota»."
-
-#: plugin/DiskQuota.cpp:192
-#, kde-format
-msgid "Running quota failed"
-msgstr "Ha fallat en executar el «quota»"
-
-#: plugin/DiskQuota.cpp:253
-#, kde-format
-msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
-msgid "%1: %2% used"
-msgstr "%1: %2% usat"
-
-#: plugin/DiskQuota.cpp:254
-#, kde-format
-msgctxt "e.g.: 12 GiB of 20 GiB"
-msgid "%1 of %2"
-msgstr "%1 de %2"
-
-#: plugin/DiskQuota.cpp:255
-#, kde-format
-msgctxt "e.g.: 8 GiB free"
-msgid "%1 free"
-msgstr "%1 lliure"
-
-#: plugin/DiskQuota.cpp:278
-#, kde-format
-msgctxt "example: Quota: 83% used"
-msgid "Quota: %1% used"
-msgstr "Quota: %1% usat"
+#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:274
+msgid "No quota restrictions found."
+msgstr "No s'han trovat restriccions de quota."
