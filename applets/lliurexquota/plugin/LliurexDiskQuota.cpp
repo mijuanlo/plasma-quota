@@ -77,7 +77,6 @@ void LliurexDiskQuota::setCleanUpToolInstalled(bool installed)
 
 LliurexDiskQuota::TrayStatus LliurexDiskQuota::status() const
 {
-    qDebug() << "Getting status " << m_status;
     return m_status;
 }
 
@@ -85,10 +84,8 @@ void LliurexDiskQuota::setStatus(LliurexDiskQuota::TrayStatus status)
 {
     if (m_status != status) {
         m_status = status;
-        qDebug() << "Setting status (with emmiting) " << status;
         emit statusChanged();
     }
-    qDebug() << "Setting status without changes with current " << m_status << " vs " << status;
 }
 
 QString LliurexDiskQuota::iconName() const
@@ -177,16 +174,16 @@ void LliurexDiskQuota::updateQuota()
     const QStringList args{
         QStringLiteral("-mq"),
     };
-    qDebug() << "Initiating lliurex-quota";
+    //qDebug() << "Initiating lliurex-quota";
     m_quotaProcess->start(QStringLiteral("lliurex-quota"), args, QIODevice::ReadOnly);
 }
 
 void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     Q_UNUSED(exitCode)
-    qDebug() << "Ending process lliurex-quota";
+    //qDebug() << "Ending process lliurex-quota";
     if (exitStatus != QProcess::NormalExit) {
-        qDebug() << "Wrong EXITCODE" ;
+        //qDebug() << "Wrong EXITCODE" ;
         m_model->clear();
         setToolTip(i18n("Lliurex Disk Quota"));
         setSubToolTip(i18n("Running lliurex-quota failed"));
@@ -195,7 +192,7 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
 
     // get quota output
     const QString rawData = QString::fromLocal8Bit(m_quotaProcess->readAllStandardOutput());
-    qDebug() << "Result from lliurex-quota cmd:" << rawData;
+    //qDebug() << "Result from lliurex-quota cmd:" << rawData;
 
     const QStringList lines = rawData.split(QRegularExpression(QStringLiteral("[\r\n]")), QString::SkipEmptyParts);
     // Testing
@@ -254,13 +251,13 @@ void LliurexDiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus e
     setIconName(iconNameForQuota(maxQuota));
 
     if (maxQuota < 50){
-        qDebug() << "Setting status passive";
+        //qDebug() << "Setting status passive";
         setStatus(PassiveStatus);
     }else if (maxQuota < 90){
-        qDebug() << "Setting status active";
+        //qDebug() << "Setting status active";
         setStatus(ActiveStatus);
     }else{
-        qDebug() << "Setting status need attention";
+        //qDebug() << "Setting status need attention";
         setStatus(NeedsAttentionStatus);
     }
     // update status
@@ -288,6 +285,7 @@ LliurexQuotaListModel *LliurexDiskQuota::model() const
 
 void LliurexDiskQuota::openCleanUpTool(const QString &mountPoint)
 {
+    Q_UNUSED(mountPoint);
     if (!cleanUpToolInstalled()) {
         return;
     }

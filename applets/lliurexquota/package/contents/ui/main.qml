@@ -36,15 +36,15 @@ Item {
     }
 
     Plasmoid.status: {
+        /* Warn! Enum types are accesed through ClassName not ObjectName
         switch (lliurexDiskQuota.status) {
-            case lliurexDiskQuota.NeedsAttentionStatus:
+            case LliurexDiskQuota.NeedsAttentionStatus:
                 return PlasmaCore.Types.NeedsAttentionStatus
-            case lliurexDiskQuota.ActiveStatus:
+            case LliurexDiskQuota.ActiveStatus:
                 return PlasmaCore.Types.ActiveStatus
-            case lliurexDiskQuota.PassiveStatus:
+            case LliurexDiskQuota.PassiveStatus:
                 return PlasmaCore.Types.PassiveStatus
         }
-        // default case: LliurexDiskQuota.PassiveStatus
         return PlasmaCore.Types.ActiveStatus
     }
     Plasmoid.switchWidth: units.gridUnit * 10
@@ -56,7 +56,6 @@ Item {
 
     Component.onCompleted: plasmoid.removeAction("configure")
 
-    
     Plasmoid.fullRepresentation: Item {
         id: root
 
@@ -73,11 +72,10 @@ Item {
                 }
             }
         }
-
         Components.Label {
             visible: !lliurexDiskQuota.quotaInstalled || listView.count == 0
             anchors.fill: parent
-            text: lliurexDiskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'quota'.")
+            text: lliurexDiskQuota.quotaInstalled ? i18n("No quota restrictions found.") : i18n("Quota tool not found.\n\nPlease install 'lliurex-quota'.")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
