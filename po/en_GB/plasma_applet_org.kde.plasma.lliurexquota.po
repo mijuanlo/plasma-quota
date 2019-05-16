@@ -1,24 +1,30 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# lliurex <lliurex@lliurex.net>, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-15 14:31+0200\n"
-"PO-Revision-Date: 2019-05-15 17:00+0200\n"
-"Language-Team: \n"
+"Report-Msgid-Bugs-To: http://plasma.kde.org/\n"
+"POT-Creation-Date: 2019-05-16 13:22+0200\n"
+"PO-Revision-Date: 2019-05-16 13:44+0200\n"
+"Last-Translator: lliurex <lliurex@lliurex.net>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
+"X-Generator: Lokalize 19.04.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en_GB\n"
 
-#: applets/lliurexquota/package/contents/ui/main.qml
+#: ../applets/lliurexquota/package/contents/ui/main.qml:78
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:274
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "No quota restrictions found."
+
+#: ../applets/lliurexquota/package/contents/ui/main.qml:78
+#, kde-format
 msgid ""
 "Quota tool not found.\n"
 "\n"
@@ -28,46 +34,62 @@ msgstr ""
 "\n"
 "Please install 'lliurex-quota'."
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:57
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:188
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:57
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:188
+#, kde-format
 msgid "Lliurex Disk Quota"
 msgstr "Lliurex Disk Quota"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:58
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:58
+#, kde-format
 msgid "Please install 'lliurex-quota'"
 msgstr "Please install 'lliurex-quota'"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:189
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:189
+#, kde-format
 msgid "Running lliurex-quota failed"
 msgstr "Running lliurex-quota failed"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:233
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:233
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+#, kde-format
 msgid "Assigned space"
 msgstr "Assigned space"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
-#, c-format
-msgid "usage of quota, e.g.: '/home/bla: 38% used'"
-msgstr "/home/bla: 38% used"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
+msgstr "%1: %2% used"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:236
-msgid "e.g.: 12 GiB of 20 GiB"
-msgstr "12 GiB of 20 GiB"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:236
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
+msgstr "%1 of %2"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:237
-msgid "e.g.: 8 GiB free"
-msgstr "8 GiB free"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:237
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
+msgstr "%1 free"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:269
-#, c-format
-msgid "example: Quota: 83% used"
-msgstr "Quota: 83% used"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:270
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
+msgstr "Quota: %1% used"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:273
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:273
+#, kde-format
 msgid "Disk Quota"
-msgstr "Disk Quota"
+msgstr "Lliurex Disk Quota"
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:274
-msgid "No quota restrictions found."
-msgstr "No quota restrictions found."
+#~ msgid "usage of quota, e.g.: '/home/bla: 38% used'"
+#~ msgstr "/home/bla: 38% used"
+
+#~ msgid "e.g.: 12 GiB of 20 GiB"
+#~ msgstr "12 GiB of 20 GiB"
+
+#~ msgid "e.g.: 8 GiB free"
+#~ msgstr "8 GiB free"

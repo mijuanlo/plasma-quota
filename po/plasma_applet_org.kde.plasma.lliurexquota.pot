@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the lliurexquota package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-15 14:31+0200\n"
+"Project-Id-Version: lliurexquota \n"
+"Report-Msgid-Bugs-To: http://plasma.kde.org/\n"
+"POT-Creation-Date: 2019-05-16 13:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,53 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applets/lliurexquota/package/contents/ui/main.qml
+#: ../applets/lliurexquota/package/contents/ui/main.qml:78 ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:274
+#, kde-format
+msgid "No quota restrictions found."
+msgstr ""
+
+#: ../applets/lliurexquota/package/contents/ui/main.qml:78
+#, kde-format
 msgid ""
 "Quota tool not found.\n"
 "\n"
 "Please install 'lliurex-quota'."
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:57
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:188
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:57 ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:188
+#, kde-format
 msgid "Lliurex Disk Quota"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:58
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:58
+#, kde-format
 msgid "Please install 'lliurex-quota'"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:189
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:189
+#, kde-format
 msgid "Running lliurex-quota failed"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:233
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:233 ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+#, kde-format
 msgid "Assigned space"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
-#, c-format
-msgid "usage of quota, e.g.: '/home/bla: 38% used'"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:235
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:236
-msgid "e.g.: 12 GiB of 20 GiB"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:236
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:237
-msgid "e.g.: 8 GiB free"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:237
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:269
-#, c-format
-msgid "example: Quota: 83% used"
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:270
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
 msgstr ""
 
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:273
+#: ../applets/lliurexquota/plugin/LliurexDiskQuota.cpp:273
+#, kde-format
 msgid "Disk Quota"
-msgstr ""
-
-#: applets/lliurexquota/plugin/LliurexDiskQuota.cpp:274
-msgid "No quota restrictions found."
 msgstr ""
