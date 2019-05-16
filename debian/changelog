@@ -1,3 +1,9 @@
+plasma-widget-lliurex-quota (0.1.1) bionic; urgency=medium
+
+  * Improved translations
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Thu, 16 May 2019 13:51:35 +0200
+
 plasma-widget-lliurex-quota (0.1) bionic; urgency=medium
 
   * Initial release
